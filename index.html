@@ -1,253 +1,206 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #0744b8; -webkit-text-stroke: #0744b8}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #1b1f22; -webkit-text-stroke: #1b1f22}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #1f762c; -webkit-text-stroke: #1f762c}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #06214f; -webkit-text-stroke: #06214f}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #1b1f22; -webkit-text-stroke: #1b1f22; min-height: 17.0px}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #1b1f22; -webkit-text-stroke: #1b1f22; background-color: #ffffff; min-height: 17.0px}
-    span.s1 {font-kerning: none}
-    span.s2 {font-kerning: none; color: #cb2339; -webkit-text-stroke: 0px #cb2339}
-    span.s3 {font-kerning: none; color: #1f762c; -webkit-text-stroke: 0px #1f762c}
-    span.s4 {font-kerning: none; color: #0744b8; -webkit-text-stroke: 0px #0744b8}
-    span.s5 {font-kerning: none; color: #06214f; -webkit-text-stroke: 0px #06214f}
-    span.s6 {font-kerning: none; color: #1b1f22; -webkit-text-stroke: 0px #1b1f22}
-    span.s7 {font-kerning: none; background-color: #ffffff}
-    span.s8 {font-kerning: none; color: #1b1f22; background-color: #ffffff; -webkit-text-stroke: 0px #1b1f22}
-    span.s9 {font-kerning: none; color: #da4c0c; -webkit-text-stroke: 0px #da4c0c}
-    span.s10 {font-kerning: none; color: #57606a; -webkit-text-stroke: 0px #57606a}
-    span.s11 {font-kerning: none; color: #5b28b4; -webkit-text-stroke: 0px #5b28b4}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本語単語カード</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f0f4f8;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .card {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .japanese,
+        .reading,
+        .chinese {
+            font-size: 2rem;
+            margin: 0.5rem 0;
+        }
+
+        .chinese {
+            display: none;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .chinese.show {
+            display: block;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #0052a3;
+        }
+
+        .shuffle-btn {
+            background: #28a745;
+        }
+
+        .shuffle-btn:hover {
+            background: #218838;
+        }
+
+        .score {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE </span><span class="s2">html</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s1">&lt;</span><span class="s3">html</span><span class="s1"> </span><span class="s4">lang</span><span class="s1">=</span><span class="s5">"ja"</span><span class="s1">&gt;</span></p>
-<p class="p3"><span class="s6">&lt;</span><span class="s1">head</span><span class="s6">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;</span><span class="s3">meta</span><span class="s1"> </span><span class="s4">charset</span><span class="s1">=</span><span class="s5">"UTF-8"</span><span class="s1">&gt;</span></p>
-<p class="p4"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">&lt;</span><span class="s3">meta</span><span class="s6"> </span><span class="s4">name</span><span class="s6">=</span><span class="s1">"viewport"</span><span class="s6"> </span><span class="s4">content</span><span class="s6">=</span><span class="s1">"width=device-width, initial-scale=1.0"</span><span class="s6">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;</span><span class="s3">title</span><span class="s1">&gt;</span><span class="s7">日本語単語カード</span><span class="s1">&lt;/</span><span class="s3">title</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;</span><span class="s3">style</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s3">body</span><span class="s1"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">font-family</span><span class="s1">: -apple-system, BlinkMacSystemFont, </span><span class="s5">'Segoe UI'</span><span class="s1">, </span><span class="s5">'Noto Sans JP'</span><span class="s1">, sans-serif;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">display</span><span class="s1">: flex;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">justify-content</span><span class="s1">: center;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">align-items</span><span class="s1">: center;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">min-height</span><span class="s1">: </span><span class="s4">100vh</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">margin</span><span class="s1">: </span><span class="s4">0</span><span class="s1">;</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">background</span><span class="s6">: </span><span class="s1">#f0f4f8</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">.container</span><span class="s1"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">background</span><span class="s1">: white;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">padding</span><span class="s1">: </span><span class="s4">2rem</span><span class="s1">;</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">border-radius</span><span class="s6">: </span><span class="s1">20px</span><span class="s6">;</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">box-shadow</span><span class="s6">: </span><span class="s1">0</span><span class="s6"> </span><span class="s1">10px</span><span class="s6"> </span><span class="s1">30px</span><span class="s6"> </span><span class="s9">rgba</span><span class="s6">(</span><span class="s1">0</span><span class="s6">,</span><span class="s1">0</span><span class="s6">,</span><span class="s1">0</span><span class="s6">,</span><span class="s1">0.1</span><span class="s6">);</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">max-width</span><span class="s1">: </span><span class="s4">500px</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">width</span><span class="s1">: </span><span class="s4">90%</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">.card</span><span class="s1"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">background</span><span class="s1">: </span><span class="s4">#fff</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">border</span><span class="s1">: </span><span class="s4">2px</span><span class="s1"> solid </span><span class="s4">#e0e0e0</span><span class="s1">;</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">border-radius</span><span class="s6">: </span><span class="s1">15px</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">padding</span><span class="s1">: </span><span class="s4">3rem</span><span class="s1"> </span><span class="s4">2rem</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">text-align</span><span class="s1">: center;</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">margin-bottom</span><span class="s6">: </span><span class="s1">2rem</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">min-height</span><span class="s1">: </span><span class="s4">200px</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">display</span><span class="s1">: flex;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">flex-direction</span><span class="s1">: column;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">justify-content</span><span class="s1">: center;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">cursor</span><span class="s1">: pointer;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">transition</span><span class="s1">: all </span><span class="s4">0.3s</span><span class="s1"> ease;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">.card</span><span class="s3">:hover</span><span class="s1"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">transform</span><span class="s1">: </span><span class="s9">translateY</span><span class="s1">(-</span><span class="s4">5px</span><span class="s1">);</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">box-shadow</span><span class="s6">: </span><span class="s1">0</span><span class="s6"> </span><span class="s1">5px</span><span class="s6"> </span><span class="s1">20px</span><span class="s6"> </span><span class="s9">rgba</span><span class="s6">(</span><span class="s1">0</span><span class="s6">,</span><span class="s1">0</span><span class="s6">,</span><span class="s1">0</span><span class="s6">,</span><span class="s1">0.1</span><span class="s6">);</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">.japanese</span><span class="s1"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">font-size</span><span class="s1">: </span><span class="s4">2.5rem</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">font-weight</span><span class="s1">: bold;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">color</span><span class="s1">: </span><span class="s4">#333</span><span class="s1">;</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">margin-bottom</span><span class="s6">: </span><span class="s1">0.5rem</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">.reading</span><span class="s1"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">font-size</span><span class="s1">: </span><span class="s4">1.2rem</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">color</span><span class="s1">: </span><span class="s4">#666</span><span class="s1">;</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">margin-bottom</span><span class="s6">: </span><span class="s1">1rem</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">.chinese</span><span class="s1"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">font-size</span><span class="s1">: </span><span class="s4">1.8rem</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">color</span><span class="s1">: </span><span class="s4">#0066cc</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">display</span><span class="s1">: none;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s1">.chinese.show</span><span class="s6"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">display</span><span class="s1">: block;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">animation</span><span class="s1">: fadeIn </span><span class="s4">0.3s</span><span class="s1"> ease;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s2">@keyframes</span><span class="s1"> fadeIn {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">from</span><span class="s1"> { </span><span class="s4">opacity</span><span class="s1">: </span><span class="s4">0</span><span class="s1">; }</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s3">to</span><span class="s1"> { </span><span class="s4">opacity</span><span class="s1">: </span><span class="s4">1</span><span class="s1">; }</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">.controls</span><span class="s1"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">display</span><span class="s1">: flex;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">gap</span><span class="s1">: </span><span class="s4">1rem</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">justify-content</span><span class="s1">: center;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">flex-wrap</span><span class="s1">: wrap;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s3">button</span><span class="s1"> {</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">background</span><span class="s6">: </span><span class="s1">#0066cc</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">color</span><span class="s1">: white;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">border</span><span class="s1">: none;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">padding</span><span class="s1">: </span><span class="s4">1rem</span><span class="s1"> </span><span class="s4">2rem</span><span class="s1">;</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">border-radius</span><span class="s6">: </span><span class="s1">10px</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">font-size</span><span class="s1">: </span><span class="s4">1rem</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">cursor</span><span class="s1">: pointer;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">transition</span><span class="s1">: background </span><span class="s4">0.3s</span><span class="s1"> ease;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p3"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s1">button:hover</span><span class="s6"> {</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">background</span><span class="s6">: </span><span class="s1">#0052a3</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">.score</span><span class="s1"> {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">text-align</span><span class="s1">: center;</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">margin-bottom</span><span class="s6">: </span><span class="s1">1rem</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">font-size</span><span class="s1">: </span><span class="s4">1.2rem</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s4">color</span><span class="s1">: </span><span class="s4">#666</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s1">.shuffle-btn</span><span class="s6"> {</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">background</span><span class="s6">: </span><span class="s1">#28a745</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">        </span></span><span class="s1">.shuffle-btn</span><span class="s3">:hover</span><span class="s6"> {</span></p>
-<p class="p1"><span class="s6"><span class="Apple-converted-space">            </span></span><span class="s1">background</span><span class="s6">: </span><span class="s1">#218838</span><span class="s6">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/</span><span class="s3">style</span><span class="s1">&gt;</span></p>
-<p class="p3"><span class="s6">&lt;/</span><span class="s1">head</span><span class="s6">&gt;</span></p>
-<p class="p3"><span class="s6">&lt;</span><span class="s1">body</span><span class="s6">&gt;</span></p>
-<p class="p4"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">&lt;</span><span class="s3">div</span><span class="s6"> </span><span class="s4">class</span><span class="s6">=</span><span class="s1">"container"</span><span class="s6">&gt;</span></p>
-<p class="p4"><span class="s8"><span class="Apple-converted-space">        </span></span><span class="s6">&lt;</span><span class="s3">h1</span><span class="s6"> </span><span class="s4">style</span><span class="s6">=</span><span class="s1">"text-align: center; color: #333;"</span><span class="s6">&gt;</span><span class="s8">日本語単語カード</span><span class="s6">&lt;/</span><span class="s3">h1</span><span class="s6">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">        </span></span><span class="s1">&lt;</span><span class="s3">div</span><span class="s1"> </span><span class="s4">class</span><span class="s1">=</span><span class="s5">"score"</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;</span><span class="s3">span</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s5">"current"</span><span class="s1">&gt;</span><span class="s7">1</span><span class="s1">&lt;/</span><span class="s3">span</span><span class="s1">&gt;</span><span class="s7"> / </span><span class="s1">&lt;</span><span class="s3">span</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s5">"total"</span><span class="s1">&gt;</span><span class="s7">39</span><span class="s1">&lt;/</span><span class="s3">span</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">        </span></span><span class="s1">&lt;/</span><span class="s3">div</span><span class="s1">&gt;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p4"><span class="s8"><span class="Apple-converted-space">        </span></span><span class="s6">&lt;</span><span class="s3">div</span><span class="s6"> </span><span class="s4">class</span><span class="s6">=</span><span class="s1">"card"</span><span class="s6"> </span><span class="s4">onclick</span><span class="s6">=</span><span class="s1">"showAnswer()"</span><span class="s6">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;</span><span class="s3">div</span><span class="s1"> </span><span class="s4">class</span><span class="s1">=</span><span class="s5">"japanese"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s5">"japanese"</span><span class="s1">&gt;&lt;/</span><span class="s3">div</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;</span><span class="s3">div</span><span class="s1"> </span><span class="s4">class</span><span class="s1">=</span><span class="s5">"reading"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s5">"reading"</span><span class="s1">&gt;&lt;/</span><span class="s3">div</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;</span><span class="s3">div</span><span class="s1"> </span><span class="s4">class</span><span class="s1">=</span><span class="s5">"chinese"</span><span class="s1"> </span><span class="s4">id</span><span class="s1">=</span><span class="s5">"chinese"</span><span class="s1">&gt;&lt;/</span><span class="s3">div</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">        </span></span><span class="s1">&lt;/</span><span class="s3">div</span><span class="s1">&gt;</span></p>
-<p class="p6"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">        </span></span><span class="s1">&lt;</span><span class="s3">div</span><span class="s1"> </span><span class="s4">class</span><span class="s1">=</span><span class="s5">"controls"</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;</span><span class="s3">button</span><span class="s1"> </span><span class="s4">onclick</span><span class="s1">=</span><span class="s5">"previousCard()"</span><span class="s1">&gt;</span><span class="s7">前へ</span><span class="s1">&lt;/</span><span class="s3">button</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;</span><span class="s3">button</span><span class="s1"> </span><span class="s4">onclick</span><span class="s1">=</span><span class="s5">"showAnswer()"</span><span class="s1">&gt;</span><span class="s7">答えを見る</span><span class="s1">&lt;/</span><span class="s3">button</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">            </span></span><span class="s1">&lt;</span><span class="s3">button</span><span class="s1"> </span><span class="s4">onclick</span><span class="s1">=</span><span class="s5">"nextCard()"</span><span class="s1">&gt;</span><span class="s7">次へ</span><span class="s1">&lt;/</span><span class="s3">button</span><span class="s1">&gt;</span></p>
-<p class="p4"><span class="s8"><span class="Apple-converted-space">            </span></span><span class="s6">&lt;</span><span class="s3">button</span><span class="s6"> </span><span class="s4">class</span><span class="s6">=</span><span class="s1">"shuffle-btn"</span><span class="s6"> </span><span class="s4">onclick</span><span class="s6">=</span><span class="s1">"shuffleCards()"</span><span class="s6">&gt;</span><span class="s8">シャッフル</span><span class="s6">&lt;/</span><span class="s3">button</span><span class="s6">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">        </span></span><span class="s1">&lt;/</span><span class="s3">div</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;/</span><span class="s3">div</span><span class="s1">&gt;</span></p>
-<p class="p6"><span class="s1"></span><br></p>
-<p class="p2"><span class="s7"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;</span><span class="s3">script</span><span class="s1">&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s2">const</span><span class="s1"> words = [</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s10">// 動詞</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"見ます"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"みます"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"看、診斷"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"探します"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"さがします"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"尋找"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"遅れます"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"おくれます"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"晚、沒趕上（時間）"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"間に合います"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"まにあいます"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"趕上（時間）"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"やります"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"做、從事"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"拾います"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"ひろいます"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"拾、撿"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"連絡します"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"れんらくします"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"聯繫"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"片づきます"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"かたづきます"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"收拾（行李）"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"出します"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"だします"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"扔、倒（垃圾）"</span><span class="s1"> },</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s10">// 形容詞・形容動詞</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"気分がいい"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"きぶんがいい"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"舒服"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"気分が悪い"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"きぶんがわるい"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"不舒服"</span><span class="s1"> },</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s10">// 名詞</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"運動会"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"うんどうかい"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"運動會"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"盆踊り"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"ぼんおどり"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"盂蘭盆節舞"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"フリーマーケット"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"跳蚤市場"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"場所"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"ばしょ"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"場所、地點"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"ボランティア"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"義工、志願者"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"財布"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"さいふ"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"錢包"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"ごみ"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"垃圾"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"国会議事堂"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"こっかいぎじどう"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"國會議事堂"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"平日"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"へいじつ"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"平日"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"〜弁"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"〜べん"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"〜方言"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"今度"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"こんど"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"這次、下次"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"随分"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"ずいぶん"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"極其、相當、很"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"直接"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"ちょくせつ"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"直接"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"いつでも"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"隨時"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"燃えるごみ"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"もえるごみ"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"可燃垃圾"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"置き場"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"おきば"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"放置處"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"横"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"よこ"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"旁邊"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"瓶"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"びん"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"瓶子"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"缶"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"かん"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"罐子"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"ガス"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"瓦斯"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"〜会社"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"〜がいしゃ"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"〜公司"</span><span class="s1"> },</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s10">// 場所を表す表現</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"どこでも"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"在任何地方都"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"だれでも"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"任何人都"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"何でも"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">"なんでも"</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"什麼都"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"こんな〜"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"這樣的〜"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"そんな〜"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"那樣的〜（離聽者較近）"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"あんな〜"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"那樣的〜（離說話者和聽者都較遠）"</span><span class="s1"> },</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>{ </span><span class="s4">japanese</span><span class="s1">: </span><span class="s5">"エドヤストア"</span><span class="s1">, </span><span class="s4">reading</span><span class="s1">: </span><span class="s5">""</span><span class="s1">, </span><span class="s4">chinese</span><span class="s1">: </span><span class="s5">"江戶屋商店（虛構的商店）"</span><span class="s1"> }</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>];</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s2">let</span><span class="s1"> currentIndex = </span><span class="s4">0</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s2">let</span><span class="s1"> shuffledWords = [...words];</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s2">function</span><span class="s1"> </span><span class="s11">showCard</span><span class="s1">() {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">const</span><span class="s1"> word = shuffledWords[currentIndex];</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">document</span><span class="s1">.</span><span class="s11">getElementById</span><span class="s1">(</span><span class="s5">'japanese'</span><span class="s1">).textContent = word.japanese;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">document</span><span class="s1">.</span><span class="s11">getElementById</span><span class="s1">(</span><span class="s5">'reading'</span><span class="s1">).textContent = word.reading;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">document</span><span class="s1">.</span><span class="s11">getElementById</span><span class="s1">(</span><span class="s5">'chinese'</span><span class="s1">).textContent = word.chinese;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">document</span><span class="s1">.</span><span class="s11">getElementById</span><span class="s1">(</span><span class="s5">'chinese'</span><span class="s1">).classList.</span><span class="s11">remove</span><span class="s1">(</span><span class="s5">'show'</span><span class="s1">);</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">document</span><span class="s1">.</span><span class="s11">getElementById</span><span class="s1">(</span><span class="s5">'current'</span><span class="s1">).textContent = currentIndex + </span><span class="s4">1</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">document</span><span class="s1">.</span><span class="s11">getElementById</span><span class="s1">(</span><span class="s5">'total'</span><span class="s1">).textContent = shuffledWords.length;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s2">function</span><span class="s1"> </span><span class="s11">showAnswer</span><span class="s1">() {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s2">document</span><span class="s1">.</span><span class="s11">getElementById</span><span class="s1">(</span><span class="s5">'chinese'</span><span class="s1">).classList.</span><span class="s11">add</span><span class="s1">(</span><span class="s5">'show'</span><span class="s1">);</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s2">function</span><span class="s1"> </span><span class="s11">nextCard</span><span class="s1">() {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>currentIndex = (currentIndex + </span><span class="s4">1</span><span class="s1">) % shuffledWords.length;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">showCard</span><span class="s1">();</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s2">function</span><span class="s1"> </span><span class="s11">previousCard</span><span class="s1">() {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>currentIndex = (currentIndex - </span><span class="s4">1</span><span class="s1"> + shuffledWords.length) % shuffledWords.length;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">showCard</span><span class="s1">();</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s2">function</span><span class="s1"> </span><span class="s11">shuffleCards</span><span class="s1">() {</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>shuffledWords = [...words].</span><span class="s11">sort</span><span class="s1">(() =&gt; </span><span class="s11">Math</span><span class="s1">.</span><span class="s11">random</span><span class="s1">() - </span><span class="s4">0.5</span><span class="s1">);</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span>currentIndex = </span><span class="s4">0</span><span class="s1">;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span><span class="s11">showCard</span><span class="s1">();</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p5"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">// 初期表示</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s11">showCard</span><span class="s1">();</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/</span><span class="s3">script</span><span class="s1">&gt;</span></p>
-<p class="p3"><span class="s6">&lt;/</span><span class="s1">body</span><span class="s6">&gt;</span></p>
-<p class="p3"><span class="s6">&lt;/</span><span class="s1">html</span><span class="s6">&gt;</span></p>
+    <div class="container">
+        <h1 style="text-align: center; color: #333;">日本語単語カード</h1>
+        <div class="score">
+            <span id="current">1</span> / <span id="total">39</span>
+        </div>
+
+        <div class="card" onclick="showAnswer()">
+            <div class="japanese" id="japanese"></div>
+            <div class="reading" id="reading"></div>
+            <div class="chinese" id="chinese"></div>
+        </div>
+
+        <div class="controls">
+            <button onclick="previousCard()">前へ</button>
+            <button onclick="showAnswer()">答えを見る</button>
+            <button onclick="nextCard()">次へ</button>
+            <button class="shuffle-btn" onclick="shuffleCards()">シャッフル</button>
+        </div>
+    </div>
+
+    <script>
+        const words = [
+            // 動詞
+            { japanese: "見ます", reading: "みます", chinese: "看、診斷" },
+            { japanese: "探します", reading: "さがします", chinese: "尋找" },
+            { japanese: "遅れます", reading: "おくれます", chinese: "晚、沒趕上（時間）" },
+            { japanese: "間に合います", reading: "まにあいます", chinese: "趕上（時間）" },
+            { japanese: "やります", reading: "", chinese: "做、從事" },
+            { japanese: "拾います", reading: "ひろいます", chinese: "拾、撿" },
+            { japanese: "連絡します", reading: "れんらくします", chinese: "聯繫" },
+            { japanese: "片づきます", reading: "かたづきます", chinese: "收拾（行李）" },
+            { japanese: "出します", reading: "だします", chinese: "扔、倒（垃圾）" },
+
+            // 形容詞・形容動詞
+            { japanese: "気分がいい", reading: "きぶんがいい", chinese: "舒服" },
+            { japanese: "気分が悪い", reading: "きぶんがわるい", chinese: "不舒服" },
+
+            // 名詞
+            { japanese: "運動会", reading: "うんどうかい", chinese: "運動會" },
+            { japanese: "盆踊り", reading: "ぼんおどり", chinese: "盂蘭盆節舞" },
+            { japanese: "フリーマーケット", reading: "", chinese: "跳蚤市場" },
+            { japanese: "場所", reading: "ばしょ", chinese: "場所、地點" },
+            { japanese: "ボランティア", reading: "", chinese: "義工、志願者" },
+            { japanese: "財布", reading: "さいふ", chinese: "錢包" },
+            { japanese: "ごみ", reading: "", chinese: "垃圾" },
+            { japanese: "国会議事堂", reading: "こっかいぎじどう", chinese: "國會議事堂" },
+            { japanese: "平日", reading: "へいじつ", chinese: "平日" },
+            { japanese: "〜弁", reading: "〜べん", chinese: "〜方言" },
+            { japanese: "今度", reading: "こんど", chinese: "這次、下次" },
+            { japanese: "随分", reading: "ずいぶん", chinese: "極其、相當、很" },
+            { japanese: "直接", reading: "ちょくせつ", chinese: "直接" },
+            { japanese: "いつでも", reading: "", chinese: "隨時" },
+            { japanese: "燃えるごみ", reading: "もえるごみ", chinese: "可燃垃圾" },
+            { japanese: "置き場", reading: "おきば", chinese: "放置處" },
+            { japanese: "横", reading: "よこ", chinese: "旁邊" },
+            { japanese: "瓶", reading: "びん", chinese: "瓶子" },
+            { japanese: "缶", reading: "かん", chinese: "罐子" },
+            { japanese: "ガス", reading: "", chinese: "瓦斯" },
+            { japanese: "〜会社", reading: "〜がいしゃ", chinese: "〜公司" },
+
+            // 場所を表す表現
+            { japanese: "どこでも", reading: "", chinese: "在任何地方都" },
+            { japanese: "だれでも", reading: "", chinese: "任何人都" },
+            { japanese: "何でも", reading: "なんでも", chinese: "什麼都" },
+            { japanese: "こんな〜", reading: "", chinese: "這樣的〜" },
+            { japanese: "そんな〜", reading: "", chinese: "那樣的〜（離聽者較近）" },
+            { japanese: "あんな〜", reading: "", chinese: "那樣的〜（離說話者和聽者都較遠）" },
+            { japanese: "エドヤストア", reading: "", chinese: "江戶屋商店（虛構的商店）" }
+        ];
+
+        let currentIndex = 0;
+        let shuffledWords = [...words];
+
+        function showCard() {
+            const word = shuffledWords[currentIndex];
+            document.getElementById('japanese').textContent = word.japanese;
+            document.getElementById('reading').textContent = word.reading;
+            document.getElementById('chinese').textContent = word.chinese;
+            document.getElementById('chinese').classList.remove('show');
+            document.getElementById('current').textContent = currentIndex + 1;
+            document.getElementById('total').textContent = shuffledWords.length;
+        }
+
+        function showAnswer() {
+            document.getElementById('chinese').classList.add('show');
+        }
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % shuffledWords.length;
+            showCard();
+        }
+
+        function previousCard() {
+            currentIndex = (currentIndex - 1 + shuffledWords.length) % shuffledWords.length;
+            showCard();
+        }
+
+        function shuffleCards() {
+            shuffledWords = [...words].sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            showCard();
+        }
+
+        // 初期表示
+        showCard();
+    </script>
 </body>
 </html>
